@@ -12,3 +12,9 @@ from keras.models import Sequential
 from keras.layers import Dense, LSTM
 import matplotlib.pyplot as plt
 plt.style.use('fivethirtyeight')
+
+
+# Here we are going to get the stock quote. Creating a variable called df, short for data frame.
+df = web.DataReader('AAPL', data_source = 'yahoo', start = '2015-01-01', end = '2020-02-17')
+# Show the data.
+print(df)
