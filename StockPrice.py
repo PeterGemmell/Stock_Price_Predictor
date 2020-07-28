@@ -89,3 +89,12 @@ model.add(LSTM(50, return_sequences=True, input_shape= (x_train.shape[1], 1)))
 model.add(LSTM(50, return_sequences=False))
 model.add(Dense(25))
 model.add(Dense(1))
+
+# Next we will Compile the model.
+# An optimizer is used to imporve upon the loss function and the loss function is used to measure how well the model did
+# on training.
+model.compile(optimizer='adam', loss='mean_squared_error')
+
+# Next we will Train the model.
+# Epochs is the number of times a dataset is passed back and forward through a neural network.
+model.fit(x_train, y_train, batch_size=1, epochs=1)
