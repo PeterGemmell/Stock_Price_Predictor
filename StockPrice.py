@@ -125,3 +125,23 @@ predictions = scaler.inverse_transform(predictions)
 # It would be good practise to evaluate your model with other metrics as well.
 rmse = np.sqrt(np.mean(((predictions - y_test)**2)))
 print(rmse)
+
+# Next we want to Plot the data.
+train = data[:training_data_len]
+valid = data[training_data_len:]
+valid['Predictions'] = predictions
+
+# Visualise the data. So this is, similar to at the start, giving us our line graph with the new data.
+# Blue in the graph is the data the model was trained on.
+# Redish Orange is the ACTUAL closing stock price for AAPL.
+# Yellow is what our model PREDICTED the values to be.
+plt.figure(figsize=(16,8))
+plt.title('Model')
+plt.xlabel('Date', fontsize=18)
+plt.ylabel('Close Price GBP (£)', fontsize=18)
+plt.plot(train['Close'])
+plt.plot(valid[['Close', 'Predictions']])
+plt.legend(['Train', 'Val', 'Predictions'], loc='lower right')
+plt.show()
+
+# Next I want to show the Actual Price and the Predicted prices
