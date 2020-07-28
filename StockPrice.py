@@ -30,7 +30,8 @@ plt.title('Close Price History')
 plt.plot(df['Close'])
 plt.xlabel('Date', fontsize=18)
 plt.ylabel('Close Price GBP(£)', fontsize=18)
-# plt.show() COMMENT BACK IN TO VIEW LINE GRAPH.
+# COMMENT BACK IN TO VIEW LINE GRAPH.
+# plt.show()
 
 # Create a new dataframe with only the 'Close column'
 data = df.filter(['Close'])
@@ -64,15 +65,17 @@ y_train = []
 # 61st value at postion 60.
 
 for i in range(60, len(train_data)):
-    x_train.append(train_data[i-60:i,0])
+    x_train.append(train_data[i-60:i, 0])
     y_train.append(train_data[i, 0])
-    if i<= 60:
+    if i<= 61:
         # print(x_train)
-        # print(y_train) prints the 61st value that we want our model to predict.
-        # print()
+        # prints the 61st value that we want our model to predict.
+        # print(y_train)
+        print()
 
-        # Convert the x_train and y_train to numpy arrays. DIDNT RUN THIS.
-        x_train, y_train = np.array(x_train), np.array(y_train)
+
+# Convert the x_train and y_train to numpy arrays.
+x_train, y_train = np.array(x_train), np.array(y_train)
 
 # Reshape the data. This is becuase an LSTM network expects the data to be 3 dimensional and right now the data set is
 # 2 dimensional.
