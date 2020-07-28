@@ -81,3 +81,11 @@ x_train, y_train = np.array(x_train), np.array(y_train)
 # 2 dimensional.
 x_train = np.reshape(x_train, (x_train.shape[0], x_train.shape[1], 1))
 print(x_train.shape)
+
+# Build the LSTM model.
+model = Sequential()
+# Next add a layer to our model.
+model.add(LSTM(50, return_sequences=True, input_shape= (x_train.shape[1], 1)))
+model.add(LSTM(50, return_sequences=False))
+model.add(Dense(25))
+model.add(Dense(1))
