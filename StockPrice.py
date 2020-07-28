@@ -120,3 +120,8 @@ x_test = np.reshape(x_test, (x_test.shape[0], x_test.shape[1], 1))
 # dataset.
 predictions = model.predict(x_test)
 predictions = scaler.inverse_transform(predictions)
+
+# Get the root mean squared error (RMSE) this is a good measure of how accurate the model predicts the response.
+# It would be good practise to evaluate your model with other metrics as well.
+rmse = np.sqrt(np.mean(((predictions - y_test)**2)))
+print(rmse)
