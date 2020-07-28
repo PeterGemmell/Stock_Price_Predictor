@@ -108,3 +108,15 @@ x_test = []
 y_test = dataset[training_data_len:, :]
 for i in range(60, len(test_data)):
     x_test.append(test_data[i-60:i, 0])
+
+# Convert the data to a numpy array
+x_test = np.array(x_test)
+
+# Reshape the data. Again because it is currently 2 dimensional and LSTM requires it to be 3 dimensional.
+x_test = np.reshape(x_test, (x_test.shape[0], x_test.shape[1], 1))
+
+# Get the models predicted price values for the x_test dataset.
+# From this we want predictions to contain the same values of our y_test dataset. We are getting these from the x_test
+# dataset.
+predictions = model.predict(x_test)
+predictions = scaler.inverse_transform(predictions)
