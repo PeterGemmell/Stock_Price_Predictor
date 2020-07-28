@@ -77,7 +77,7 @@ for i in range(60, len(train_data)):
 # Convert the x_train and y_train to numpy arrays.
 x_train, y_train = np.array(x_train), np.array(y_train)
 
-# Reshape the data. This is becuase an LSTM network expects the data to be 3 dimensional and right now the data set is
+# Reshape the data. This is because an LSTM network expects the data to be 3 dimensional and right now the data set is
 # 2 dimensional.
 x_train = np.reshape(x_train, (x_train.shape[0], x_train.shape[1], 1))
 print(x_train.shape)
@@ -98,3 +98,13 @@ model.compile(optimizer='adam', loss='mean_squared_error')
 # Next we will Train the model.
 # Epochs is the number of times a dataset is passed back and forward through a neural network.
 model.fit(x_train, y_train, batch_size=1, epochs=1)
+
+# Create the testing dataset.
+# Create a new array containing scaled values from 1061 to 2003? Where is 2003 coming from??? 1289 or 1401.
+test_data = scaled_data[training_data_len - 60: , :]
+# Create the datasets x_test and y_test
+# y_test will be all of the values that we want our model to predict.
+x_test = []
+y_test = dataset[training_data_len:, :]
+for i in range(60, len(test_data)):
+    x_test.append(test_data[i-60:i, 0])
