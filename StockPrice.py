@@ -145,3 +145,32 @@ plt.legend(['Train', 'Val', 'Predictions'], loc='lower right')
 plt.show()
 
 # Next I want to show the Actual Price and the Predicted prices
+print(valid)
+
+# Get the quote
+apple_quote = web.DataReader('AAPL', data_source='yahoo', start='2015-01-01', end='2020-07-27')
+# Create a new dataframe
+new_df = apple_quote.filter(['Close'])
+# Get the last 60 day closing price values and convert the dataframe to an array
+last_60_days = new_df[-60:].values
+# Scale the data to be values between 0 and 1
+# We are not using fit.transform as we want it to transform the data using the same min and max values that we used when we first
+# transformed the data.
+last_60_days_scaled = scaler.transform(last_60_days)
+# Create an empty list.
+X_test = []
+# Append the past 60 days
+X_test.append(last_60_days_scaled)
+# Convert the X_test dataset to a numpy array
+X_test = np.array(X_test)
+# Reshape the data again so it is 3 dimensional
+X_test = np.reshape(X_test, (X_test.shape[0], X_test.shape[1], 1))
+# Get the predicted scaled price
+pred_price = model.predict(X_test)
+# Undo the scaling
+pred_price = scaler.inverse_transform(pred_price)
+print(pred_price)
+
+# Get the quote
+apple_quote2 = web.DataReader('AAPL', data_source='yahoo', start='2020-07-28', end='2020-07-28')
+print(apple_quote2['Close'])
