@@ -14,3 +14,4 @@
 
 * Matplotlib will render two graphs which will pop up, along with historic closing price data v predictions.
 
+![Imgur](https://i.imgur.com/RBSPGUP.png)
