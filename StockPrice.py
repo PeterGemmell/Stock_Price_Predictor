@@ -16,7 +16,7 @@ plt.style.use('fivethirtyeight')
 
 
 # Here we are going to get the stock quote. Creating a variable called df, short for dataframe.
-df = web.DataReader('AAPL', data_source = 'yahoo', start = '2015-01-01', end = '2020-07-27')
+df = web.DataReader('TSLA', data_source = 'yahoo', start = '2015-01-01', end = '2020-07-28')
 
 # Show the data.
 # print(df) Will print the historic stock data in the terminal.
@@ -26,10 +26,10 @@ df = web.DataReader('AAPL', data_source = 'yahoo', start = '2015-01-01', end = '
 
 # Visualise the closing price history. Running plt.show() opens a line graph showing closing price history over the years.
 plt.figure(figsize=(16,8))
-plt.title('Close Price History')
+plt.title('Tesla Close Price History')
 plt.plot(df['Close'])
 plt.xlabel('Date', fontsize=18)
-plt.ylabel('Close Price GBP(£)', fontsize=18)
+plt.ylabel('Close Price USD($)', fontsize=18)
 # COMMENT BACK IN TO VIEW LINE GRAPH.
 # plt.show()
 
@@ -136,9 +136,9 @@ valid['Predictions'] = predictions
 # Redish Orange is the ACTUAL closing stock price for AAPL.
 # Yellow is what our model PREDICTED the values to be.
 plt.figure(figsize=(16,8))
-plt.title('Model')
+plt.title('Tesla Model')
 plt.xlabel('Date', fontsize=18)
-plt.ylabel('Close Price GBP (£)', fontsize=18)
+plt.ylabel('Close Price USD ($)', fontsize=18)
 plt.plot(train['Close'])
 plt.plot(valid[['Close', 'Predictions']])
 plt.legend(['Train', 'Val', 'Predictions'], loc='lower right')
@@ -148,9 +148,9 @@ plt.show()
 print(valid)
 
 # Get the quote
-apple_quote = web.DataReader('AAPL', data_source='yahoo', start='2015-01-01', end='2020-07-27')
+tesla_quote = web.DataReader('TSLA', data_source='yahoo', start='2015-01-01', end='2020-07-28')
 # Create a new dataframe
-new_df = apple_quote.filter(['Close'])
+new_df = tesla_quote.filter(['Close'])
 # Get the last 60 day closing price values and convert the dataframe to an array
 last_60_days = new_df[-60:].values
 # Scale the data to be values between 0 and 1
@@ -172,5 +172,5 @@ pred_price = scaler.inverse_transform(pred_price)
 print(pred_price)
 
 # Get the quote
-apple_quote2 = web.DataReader('AAPL', data_source='yahoo', start='2020-07-28', end='2020-07-28')
-print(apple_quote2['Close'])
+tesla_quote2 = web.DataReader('TSLA', data_source='yahoo', start='2020-07-29', end='2020-07-29')
+print(tesla_quote2['Close'])
