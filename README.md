@@ -12,7 +12,7 @@
 
 * Type the command python StockPrice.py
 
-* Matplotlib will render two graphs which will pop up, along with historic closing price data v predictions.
+* Matplotlib will render two graphs which will pop up, along with historic closing price data v predictions in the command line.
 
 ![Imgur](https://i.imgur.com/RBSPGUP.png)
 ![Imgur](https://i.imgur.com/mE9F7X5.png)
