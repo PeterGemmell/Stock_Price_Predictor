@@ -32,7 +32,7 @@ def send_email(username, password, fromaddr, toaddr, msg):
 
 
 # Here we are going to get the stock quote. Creating a variable called df, short for dataframe.
-df = web.DataReader('TSLA', data_source = 'yahoo', start = '2015-01-01', end = '2020-07-28')
+df = web.DataReader('TSLA', data_source = 'yahoo', start = '2015-01-01', end = '2020-07-29')
 
 # Show the data.
 # print(df) Will print the historic stock data in the terminal.
@@ -164,7 +164,7 @@ plt.show()
 print(valid)
 
 # Get the quote
-tesla_quote = web.DataReader('TSLA', data_source='yahoo', start='2015-01-01', end='2020-07-28')
+tesla_quote = web.DataReader('TSLA', data_source='yahoo', start='2015-01-01', end='2020-07-29')
 # Create a new dataframe
 new_df = tesla_quote.filter(['Close'])
 # Get the last 60 day closing price values and convert the dataframe to an array
@@ -188,7 +188,7 @@ pred_price = scaler.inverse_transform(pred_price)
 print(pred_price)
 
 # Get the quote
-tesla_quote2 = web.DataReader('TSLA', data_source='yahoo', start='2020-07-29', end='2020-07-29')
+tesla_quote2 = web.DataReader('TSLA', data_source='yahoo', start='2020-07-30', end='2020-07-30')
 print(tesla_quote2['Close'])
 
 
@@ -197,9 +197,10 @@ def email_stock_info(username, password, fromaddr, toaddr):
     email_msg = ''
     html_msg  = """\
 	<html>
-		<head></head>
+		<head>The Predicted Price For Tesla Today Is:</head>
 		<body>
-			<p>
+			<p>2020-07-30</p>
+            <p>1483.182617</p>
 	"""
 
 
