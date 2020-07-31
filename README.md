@@ -8,7 +8,7 @@
 
 * run pipenv shell
 
-* On line 19 and 151 you will need to change 'end date' to yesterdays date. On line 175 you will need to change the end date to today's in order to get the Closing prediction for said day.
+* On line 19 and 151 in your editor you will need to change 'end date' to yesterdays date. On line 175 you will need to change the end date to today's in order to get the Closing prediction for said day.
 
 * Type the command python StockPrice.py
 
