@@ -142,6 +142,9 @@ plt.ylabel('Close Price USD ($)', fontsize=18)
 plt.plot(train['Close'])
 plt.plot(valid[['Close', 'Predictions']])
 plt.legend(['Train', 'Val', 'Predictions'], loc='lower right')
+fig1 = plt.gcf()
+plt.draw()
+fig1.savefig('stocktest.png', dpi=100)
 plt.show()
 
 # Next I want to show the Actual Price and the Predicted prices

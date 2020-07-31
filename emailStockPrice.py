@@ -158,7 +158,10 @@ plt.ylabel('Close Price USD ($)', fontsize=18)
 plt.plot(train['Close'])
 plt.plot(valid[['Close', 'Predictions']])
 plt.legend(['Train', 'Val', 'Predictions'], loc='lower right')
+fig1 = plt.gcf()
 plt.show()
+plt.draw()
+fig1.savefig('teslachart.png', dpi=100)
 
 # Next I want to show the Actual Price and the Predicted prices
 print(valid)
@@ -199,8 +202,7 @@ def email_stock_info(username, password, fromaddr, toaddr):
 	<html>
 		<head>The Predicted Price For Tesla Today Is:</head>
 		<body>
-			<p>2020-07-30</p>
-            <p>1483.182617</p>
+			<p><img src='teslachart.png'</p>
 	"""
 
 
