@@ -10,26 +10,28 @@ import smtplib
 from email.mime.multipart import MIMEMultipart # MIME message type combines HTML and plain text.
 from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
+from bokeh.io import export_png, export_svgs
+from bokeh.models import ColumnDataSource, DataTable, TableColumn
 plt.style.use('fivethirtyeight')
 
 
-Uname = ''
-Pword = ''
-Faddr = Uname + ''
-Taddr = ''
-
-
-def send_email(username, password, fromaddr, toaddr, msg):
-    print ('Sending stock information to ' + toaddr)
-    try:
-            server = smtplib.SMTP('smtp.gmail.com:587')
-            server.ehlo()
-            server.starttls()
-            server.login(username,password)
-            server.sendmail(fromaddr, toaddr, msg.as_string())
-            server.quit()
-    except:
-            print ('Unable to send email')
+# Uname = 'pgem163'
+# Pword = 'BallsToYou12'
+# Faddr = Uname + 'pgem163@gmail.com'
+# Taddr = 'petergemmell65@hotmail.com'
+#
+#
+# def send_email(username, password, fromaddr, toaddr, msg):
+#     print ('Sending stock information to ' + toaddr)
+#     try:
+#             server = smtplib.SMTP('smtp.gmail.com:587')
+#             server.ehlo()
+#             server.starttls()
+#             server.login(username,password)
+#             server.sendmail(fromaddr, toaddr, msg.as_string())
+#             server.quit()
+#     except:
+#             print ('Unable to send email')
 
 
 # Here we are going to get the stock quote. Creating a variable called df, short for dataframe.
@@ -189,6 +191,7 @@ X_test = np.reshape(X_test, (X_test.shape[0], X_test.shape[1], 1))
 pred_price = model.predict(X_test)
 # Undo the scaling
 pred_price = scaler.inverse_transform(pred_price)
+
 print(pred_price)
 
 # Get the quote
@@ -199,42 +202,42 @@ print(tesla_quote2['Close'])
 
 
 
-def email_stock_info(username, password, fromaddr, toaddr):
-    email_msg = ''
-    html_msg  = """\
-	<html>
-		<head>The Predicted Price For Tesla Today Is:</head>
-		<body>
-			<p></p>
-        </body>
-    </html>
-	"""
-
-    mime_msg = MIMEMultipart('alternative')
-    mime_msg.attach(MIMEText(email_msg, 'plain'))
-    mime_msg.attach(MIMEText(html_msg, 'html'))
-
-
-    attachment = 'teslachart.png'
-    body = ''
-
-    mime_msg['Subject'] = 'Stock Information'
-    mime_msg['From'] = fromaddr
-    mime_msg['To'] = toaddr
-
-    msgText = MIMEText('<b>%s</b><br><img src="cid:%s"><br>' % (body, attachment), 'html')
-    mime_msg.attach(msgText)   # Added, and edited the previous line
-
-    fp = open(attachment, 'rb')
-    img = MIMEImage(fp.read())
-    fp.close()
-    img.add_header('Content-ID', '<{}>'.format(attachment))
-    mime_msg.attach(img)
-
-
-    send_email(username, password, fromaddr, toaddr, mime_msg)
-
-
-
-if __name__ == '__main__':
-    email_stock_info(Uname, Pword, Faddr, Taddr)
+# def email_stock_info(username, password, fromaddr, toaddr):
+#     email_msg = ''
+#     html_msg  = """\
+# 	<html>
+# 		<head>The Predicted Price For Tesla Today Is:</head>
+# 		<body>
+# 			<p></p>
+#         </body>
+#     </html>
+# 	"""
+#
+#     mime_msg = MIMEMultipart('alternative')
+#     mime_msg.attach(MIMEText(email_msg, 'plain'))
+#     mime_msg.attach(MIMEText(html_msg, 'html'))
+#
+#
+#     attachment = 'teslachart.png'
+#     body = ''
+#
+#     mime_msg['Subject'] = 'Stock Information'
+#     mime_msg['From'] = fromaddr
+#     mime_msg['To'] = toaddr
+#
+#     msgText = MIMEText('<b>%s</b><br><img src="cid:%s"><br>' % (body, attachment), 'html')
+#     mime_msg.attach(msgText)   # Added, and edited the previous line
+#
+#     fp = open(attachment, 'rb')
+#     img = MIMEImage(fp.read())
+#     fp.close()
+#     img.add_header('Content-ID', '<{}>'.format(attachment))
+#     mime_msg.attach(img)
+#
+#
+#     send_email(username, password, fromaddr, toaddr, mime_msg)
+#
+#
+#
+# if __name__ == '__main__':
+#     email_stock_info(Uname, Pword, Faddr, Taddr)
