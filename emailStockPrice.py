@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 import smtplib
 from email.mime.multipart import MIMEMultipart # MIME message type combines HTML and plain text.
 from email.mime.text import MIMEText
+from email.mime.image import MIMEImage
 plt.style.use('fivethirtyeight')
 
 
@@ -196,22 +197,40 @@ print(tesla_quote2['Close'])
 
 
 
+
+
 def email_stock_info(username, password, fromaddr, toaddr):
     email_msg = ''
     html_msg  = """\
 	<html>
 		<head>The Predicted Price For Tesla Today Is:</head>
 		<body>
-			<p><img src='teslachart.png'</p>
+			<p></p>
+        </body>
+    </html>
 	"""
-
 
     mime_msg = MIMEMultipart('alternative')
     mime_msg.attach(MIMEText(email_msg, 'plain'))
     mime_msg.attach(MIMEText(html_msg, 'html'))
+
+
+    attachment = 'teslachart.png'
+    body = ''
+
     mime_msg['Subject'] = 'Stock Information'
     mime_msg['From'] = fromaddr
     mime_msg['To'] = toaddr
+
+    msgText = MIMEText('<b>%s</b><br><img src="cid:%s"><br>' % (body, attachment), 'html')
+    mime_msg.attach(msgText)   # Added, and edited the previous line
+
+    fp = open(attachment, 'rb')
+    img = MIMEImage(fp.read())
+    fp.close()
+    img.add_header('Content-ID', '<{}>'.format(attachment))
+    mime_msg.attach(img)
+
 
     send_email(username, password, fromaddr, toaddr, mime_msg)
 
