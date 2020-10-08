@@ -15,10 +15,10 @@ from bokeh.models import ColumnDataSource, DataTable, TableColumn
 plt.style.use('fivethirtyeight')
 
 
-# Uname = 'pgem163'
-# Pword = 'BallsToYou12'
-# Faddr = Uname + 'pgem163@gmail.com'
-# Taddr = 'petergemmell65@hotmail.com'
+# Uname = ''
+# Pword = ''
+# Faddr = Uname + ''
+# Taddr = ''
 #
 #
 # def send_email(username, password, fromaddr, toaddr, msg):
